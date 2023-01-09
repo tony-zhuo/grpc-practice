@@ -1,4 +1,4 @@
-module github.com/tony-zhuo/grpc-practice/client
+module github.com/tony-zhuo/grpc-practice/server
 
 go 1.19
 

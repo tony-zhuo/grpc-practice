@@ -19,6 +19,7 @@ type server struct {
 }
 
 func (s *server) GetUserInfo(ctx context.Context, req *pb.UserInfoReq) (*pb.UserInfoResp, error) {
+	log.Printf("grpc server GetUserInfo: %+v", req.GetAccount())
 	return &pb.UserInfoResp{LastName: "Zhuo", FirstName: "Tony", Age: int32(28)}, nil
 }
 

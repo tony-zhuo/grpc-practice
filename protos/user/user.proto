@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package user;
+option go_package = "grpc-practice/protos/user";
+
+message UserInfoReq {
+  string account = 1;
+}
+
+message UserInfoResp {
+  string first_name = 1;
+  string last_name = 2;
+  int32 age = 3;
+}
+
+service GetUserInfoService {
+  rpc GetUserInfo(UserInfoReq) returns (UserInfoResp) {}
+}

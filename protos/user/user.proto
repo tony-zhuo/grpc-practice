@@ -13,6 +13,6 @@ message UserInfoResp {
   int32 age = 3;
 }
 
-service GetUserInfoService {
+service UserService {
   rpc GetUserInfo(UserInfoReq) returns (UserInfoResp) {}
 }

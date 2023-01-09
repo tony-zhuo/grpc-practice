@@ -18,86 +18,86 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// GetUserInfoServiceClient is the client API for GetUserInfoService service.
+// UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GetUserInfoServiceClient interface {
+type UserServiceClient interface {
 	GetUserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error)
 }
 
-type getUserInfoServiceClient struct {
+type userServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewGetUserInfoServiceClient(cc grpc.ClientConnInterface) GetUserInfoServiceClient {
-	return &getUserInfoServiceClient{cc}
+func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
+	return &userServiceClient{cc}
 }
 
-func (c *getUserInfoServiceClient) GetUserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error) {
+func (c *userServiceClient) GetUserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error) {
 	out := new(UserInfoResp)
-	err := c.cc.Invoke(ctx, "/user.GetUserInfoService/GetUserInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.UserService/GetUserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// GetUserInfoServiceServer is the server API for GetUserInfoService service.
-// All implementations must embed UnimplementedGetUserInfoServiceServer
+// UserServiceServer is the server API for UserService service.
+// All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
-type GetUserInfoServiceServer interface {
+type UserServiceServer interface {
 	GetUserInfo(context.Context, *UserInfoReq) (*UserInfoResp, error)
-	mustEmbedUnimplementedGetUserInfoServiceServer()
+	mustEmbedUnimplementedUserServiceServer()
 }
 
-// UnimplementedGetUserInfoServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedGetUserInfoServiceServer struct {
+// UnimplementedUserServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedUserServiceServer struct {
 }
 
-func (UnimplementedGetUserInfoServiceServer) GetUserInfo(context.Context, *UserInfoReq) (*UserInfoResp, error) {
+func (UnimplementedUserServiceServer) GetUserInfo(context.Context, *UserInfoReq) (*UserInfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
 }
-func (UnimplementedGetUserInfoServiceServer) mustEmbedUnimplementedGetUserInfoServiceServer() {}
+func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
-// UnsafeGetUserInfoServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GetUserInfoServiceServer will
+// UnsafeUserServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UserServiceServer will
 // result in compilation errors.
-type UnsafeGetUserInfoServiceServer interface {
-	mustEmbedUnimplementedGetUserInfoServiceServer()
+type UnsafeUserServiceServer interface {
+	mustEmbedUnimplementedUserServiceServer()
 }
 
-func RegisterGetUserInfoServiceServer(s grpc.ServiceRegistrar, srv GetUserInfoServiceServer) {
-	s.RegisterService(&GetUserInfoService_ServiceDesc, srv)
+func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
+	s.RegisterService(&UserService_ServiceDesc, srv)
 }
 
-func _GetUserInfoService_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UserInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GetUserInfoServiceServer).GetUserInfo(ctx, in)
+		return srv.(UserServiceServer).GetUserInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.GetUserInfoService/GetUserInfo",
+		FullMethod: "/user.UserService/GetUserInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GetUserInfoServiceServer).GetUserInfo(ctx, req.(*UserInfoReq))
+		return srv.(UserServiceServer).GetUserInfo(ctx, req.(*UserInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// GetUserInfoService_ServiceDesc is the grpc.ServiceDesc for GetUserInfoService service.
+// UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var GetUserInfoService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.GetUserInfoService",
-	HandlerType: (*GetUserInfoServiceServer)(nil),
+var UserService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "user.UserService",
+	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetUserInfo",
-			Handler:    _GetUserInfoService_GetUserInfo_Handler,
+			Handler:    _UserService_GetUserInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
